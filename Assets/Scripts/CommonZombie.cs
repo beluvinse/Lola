@@ -30,15 +30,19 @@ public class CommonZombie : Enemy
         FollowPlayer();
         if (distance <= _chaseRadius && distance > _attackRadius)
         {
+            _myAnim.SetBool("moving", true);
             _navMeshAgent.SetDestination(player.position);
             transform.LookAt(player);
             _isAttacking = false;
         }
         else if (distance <= _attackRadius)
         {
+            _navMeshAgent.isStopped = true;
             _isAttacking = true;
             Attack();
         }
+        else
+            _myAnim.SetBool("moving", false);
 
     }
 
@@ -62,7 +66,6 @@ public class CommonZombie : Enemy
 
     private void FollowPlayer()
     {
-        _myAnim.SetBool("moving", true);
         if (_isAttacking) _navMeshAgent.isStopped = true;
         else _navMeshAgent.isStopped = false;
     }
