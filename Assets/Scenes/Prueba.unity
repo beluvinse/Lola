@@ -13810,6 +13810,7 @@ MonoBehaviour:
   _waves: 1
   door: {fileID: 784937708}
   currentEnemies: 0
+  player: {fileID: 1891459609}
 --- !u!4 &1320550246
 Transform:
   m_ObjectHideFlags: 0

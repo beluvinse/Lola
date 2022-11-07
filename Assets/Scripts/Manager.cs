@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class Manager : MonoBehaviour
     private int _currentWave = 1;
     [SerializeField] private int currentEnemies;
 
-    
+    public GameObject player;
+    private float _health;
 
     private void Start()
     {
@@ -33,6 +35,14 @@ public class Manager : MonoBehaviour
                 currentEnemies = _enemysToKillInWave;
             }
             
+        }
+
+
+        _health = player.GetComponent<HealthManager>().getHealth();
+        
+        if(_health <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 
@@ -68,4 +78,5 @@ public class Manager : MonoBehaviour
         if (door.transform.position.x < 8f)
             door.transform.position += Vector3.right * 5f * Time.deltaTime;
     }
+
 }
