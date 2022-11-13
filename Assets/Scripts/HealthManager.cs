@@ -14,6 +14,11 @@ public class HealthManager : MonoBehaviour
         return _health;
     }
 
+    public void setHealth(float health)
+    {
+        _health = health;
+    }
+
     public float getMaxHealth()
     {
         return _maxHealth;
