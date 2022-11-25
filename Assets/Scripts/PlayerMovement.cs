@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveSpeed = 0;
         _myAnim.SetTrigger("onShoot");
-        yield return new WaitForSeconds(gun.shotDelay);
+        yield return new WaitForSeconds(0.25f);
         _myAnim.SetTrigger("onEndShoot");
         _moveSpeed = startSpeed;
     }
