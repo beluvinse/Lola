@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject controlsUI;
     public GameObject generalUI;
+    public GameObject ajustesUI;
 
 
     public void Play()
@@ -19,10 +20,17 @@ public class MenuManager : MonoBehaviour
         controlsUI.SetActive(true);
         generalUI.SetActive(false);
     }
+    
+    public void Ajustes()
+    {
+        ajustesUI.SetActive(true);
+        generalUI.SetActive(false);
+    }
 
     public void Atras()
     {
         controlsUI.SetActive(false);
+        ajustesUI.SetActive(false);
         generalUI.SetActive(true);
     }
 

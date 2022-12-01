@@ -25,13 +25,15 @@ public class PlayerMovement : MonoBehaviour
     Camera _mainCamera;
 
     private Animator _myAnim;
-    [SerializeField] private AnimationClip _punchAnimation;
     [SerializeField] private string _xAxisName;
     [SerializeField] private string _zAxisName;
     [SerializeField] private AnimationClip _shootAnimation;
 
     public GunController gun;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip _gunSFX;
+    private AudioSource _myAudioSource;
 
     private void Start()
     {
@@ -40,6 +42,7 @@ public class PlayerMovement : MonoBehaviour
         _mainCamera = FindObjectOfType<Camera>();
         _myAnim = GetComponentInChildren<Animator>();
         startSpeed = _moveSpeed;
+        _myAudioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -65,12 +68,6 @@ public class PlayerMovement : MonoBehaviour
             myRb.drag = groundDrag;
         else
             myRb.drag = 0;
-
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            StartCoroutine(crOnPunch());
-        }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -126,20 +123,20 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private IEnumerator crOnPunch()
+    public void OnShoot()
     {
-        var speed = _moveSpeed;
-        _moveSpeed = 0;
-        _myAnim.SetTrigger("onPunch");
-        yield return new WaitForSeconds(_punchAnimation.length);
-        _myAnim.SetTrigger("onEndPunch");
-        _moveSpeed = speed;
+        _myAudioSource.clip = _gunSFX;
+        if (!_myAudioSource.isPlaying)
+        {
+            _myAudioSource.Play();
+        }
     }
 
     private IEnumerator crOnShoot()
     {
         _moveSpeed = 0;
         _myAnim.SetTrigger("onShoot");
+        OnShoot();
         yield return new WaitForSeconds(0.25f);
         _myAnim.SetTrigger("onEndShoot");
         _moveSpeed = startSpeed;

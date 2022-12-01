@@ -11,6 +11,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float _maxLife;
     [SerializeField] protected float _damage;
     protected NavMeshAgent _navMeshAgent;
+    public ParticleSystem blood;
 
     private Manager _manager;
 

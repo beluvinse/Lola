@@ -16,7 +16,7 @@ public class MedKit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && player.GetComponent<HealthManager>().getHealth() < 100)
         {
             Heal();
             Destroy(this.gameObject);
