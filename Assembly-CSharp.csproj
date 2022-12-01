@@ -57,6 +57,7 @@
     <Compile Include="Assets\Scripts\BulletController.cs" />
     <Compile Include="Assets\Scripts\MedKit.cs" />
     <Compile Include="Assets\Scripts\RangedZombie.cs" />
+    <Compile Include="Assets\Scripts\AudioRequester.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\TestMovement.cs" />
@@ -67,10 +68,10 @@
     <Compile Include="Assets\Scripts\Spikes.cs" />
     <Compile Include="Assets\Scripts\CommonZombie.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
+    <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\SpikesTrigger.cs" />
     <Compile Include="Assets\Scripts\CursorController.cs" />
-    <Compile Include="Assets\AudioManager.cs" />
-    <Compile Include="Assets\AudioRequester.cs" />
+    <Compile Include="Assets\Scripts\AdditiveSceneLoader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

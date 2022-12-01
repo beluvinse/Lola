@@ -7,18 +7,21 @@ public class Manager : MonoBehaviour
 {
     [SerializeField] private int _enemysToKillInWave;
     [SerializeField] private int _waves;
+    AdditiveSceneLoader loader;
 
     public Transform door;
 
     private int _currentWave = 1;
     [SerializeField] private int currentEnemies;
 
-    public GameObject player;
+    HealthManager player;
     private float _health;
 
     private void Start()
     {
         currentEnemies = _enemysToKillInWave;
+        loader = FindObjectOfType<AdditiveSceneLoader>();
+        player = FindObjectOfType<HealthManager>();
     }
 
     private void Update()
@@ -28,6 +31,7 @@ public class Manager : MonoBehaviour
             if(_currentWave == _waves)
             {
                 OpenDoor();
+                loader.AllEnemiesKilled();
             }
             else
             {
@@ -38,7 +42,7 @@ public class Manager : MonoBehaviour
         }
 
 
-        _health = player.GetComponent<HealthManager>().getHealth();
+        _health = player.getHealth();
         
         if(_health <= 0)
         {
@@ -73,7 +77,7 @@ public class Manager : MonoBehaviour
         return _waves;
     }
 
-    private void OpenDoor()
+    public void OpenDoor()
     {
         if (door.transform.position.x < 8f)
             door.transform.position += Vector3.right * 5f * Time.deltaTime;
