@@ -13,9 +13,11 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private AudioClip _takeDamageSFX;
     private AudioSource _myAudioSource;
 
+    public GameObject hurtParticle;
+
     private void Start()
     {
-        _myAudioSource = FindObjectOfType<AudioSource>();
+        _myAudioSource = GetComponent<AudioSource>();
     }
 
     public float getHealth()
@@ -46,5 +48,7 @@ public class HealthManager : MonoBehaviour
         {
             _myAudioSource.Play();
         }
+        Instantiate(hurtParticle, this.gameObject.transform.position, this.gameObject.transform.rotation, this.transform);
     }
 }
+

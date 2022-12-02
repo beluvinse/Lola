@@ -8,11 +8,13 @@ public class MedKit : MonoBehaviour
     public float healing;
     public GameObject player;
     public GameObject healParticle;
-
+    [SerializeField] private AudioClip _healSFX;
+    private AudioSource _myAudioSource;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        _myAudioSource = player.GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,6 +34,11 @@ public class MedKit : MonoBehaviour
         if (health > 100)
             health = 100;
         player.GetComponent<HealthManager>().setHealth(health);
+        _myAudioSource.clip = _healSFX;
+        if (!_myAudioSource.isPlaying)
+        {
+            _myAudioSource.Play();
+        }
         Instantiate(healParticle, this.gameObject.transform.position, this.gameObject.transform.rotation, player.transform);
     }
 
