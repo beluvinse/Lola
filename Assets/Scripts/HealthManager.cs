@@ -9,6 +9,15 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private float _maxHealth;
     [SerializeField] private float _health;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip _takeDamageSFX;
+    private AudioSource _myAudioSource;
+
+    private void Start()
+    {
+        _myAudioSource = FindObjectOfType<AudioSource>();
+    }
+
     public float getHealth()
     {
         return _health;
@@ -32,5 +41,10 @@ public class HealthManager : MonoBehaviour
     public void TakeDamage(float val)
     {
         _health -= val;
+        _myAudioSource.clip = _takeDamageSFX;
+        if (!_myAudioSource.isPlaying)
+        {
+            _myAudioSource.Play();
+        }
     }
 }
