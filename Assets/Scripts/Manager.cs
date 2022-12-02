@@ -46,7 +46,7 @@ public class Manager : MonoBehaviour
         
         if(_health <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene("Lose");
         }
     }
 

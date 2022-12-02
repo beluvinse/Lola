@@ -25,6 +25,7 @@ public class RangedZombie : Enemy
         _myAnim = GetComponentInChildren<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         player = Transform.FindObjectOfType<PlayerMovement>().transform;
+        _myAnim.SetBool("moving", false);
     }
 
     private void FixedUpdate()
@@ -36,6 +37,7 @@ public class RangedZombie : Enemy
             _navMeshAgent.SetDestination(player.position);
             transform.LookAt(player);
             _isAttacking = false;
+            _myAnim.SetBool("moving", true);
         }
         else if (distance <= _attackRadius)
         {
@@ -43,7 +45,8 @@ public class RangedZombie : Enemy
             transform.LookAt(player);
             Attack();
         }
-
+        else
+            _myAnim.SetBool("moving", false);
     }
 
     public override void Attack()
