@@ -49,8 +49,9 @@ MonoBehaviour:
   _life: 100
   _maxLife: 100
   _damage: 20
-  player: {fileID: 0}
-  _chaseRadius: 20
+  blood: {fileID: 0}
+  player: {fileID: 6614007289580347048, guid: b5cc315ff7bcdec4098ae081a489b9df, type: 3}
+  _chaseRadius: 30
   _attackRadius: 5
   _attackDelay: 2
   _isAttacking: 0

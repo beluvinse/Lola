@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healing: 25
   player: {fileID: 0}
+  healParticle: {fileID: 1570380295437146755, guid: c13a78aeee8c2864e981731d95824c5b, type: 3}
 --- !u!65 &2686110506286077586
 BoxCollider:
   m_ObjectHideFlags: 0

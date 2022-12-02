@@ -11,7 +11,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float _maxLife;
     [SerializeField] protected float _damage;
     protected NavMeshAgent _navMeshAgent;
-    public ParticleSystem blood;
+    public GameObject blood;
 
     private Manager _manager;
 
@@ -25,7 +25,9 @@ public abstract class Enemy : MonoBehaviour
     public void TakeDamage(float val)
     {
         _life -= val;
+        Instantiate(blood, transform.position, transform.rotation, this.transform);
         if (_life <= 0) DestroyObject();
+
     }
 
 

@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24fc5bf472958184fba574bb6559b6ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 15
-  _damage: 100
+  _speed: 25
+  _damage: 20
   hitTag: Enemy
 --- !u!54 &2558827182895601456
 Rigidbody:
