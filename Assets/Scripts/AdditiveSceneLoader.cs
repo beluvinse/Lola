@@ -36,6 +36,7 @@ public class AdditiveSceneLoader : MonoBehaviour
         asyncLoad.completed += OpenDoor;
         _isSceneLoaded = true;
 
+
     }
 
 }

@@ -7,6 +7,7 @@ public class Manager : MonoBehaviour
 {
     [SerializeField] private int _enemysToKillInWave;
     [SerializeField] private int _waves;
+    [SerializeField] public int _level;
     AdditiveSceneLoader loader;
 
     public Transform door;
@@ -15,6 +16,7 @@ public class Manager : MonoBehaviour
     [SerializeField] private int currentEnemies;
 
     HealthManager player;
+    CameraController cam;
     private float _health;
 
     private void Start()
@@ -22,6 +24,7 @@ public class Manager : MonoBehaviour
         currentEnemies = _enemysToKillInWave;
         loader = FindObjectOfType<AdditiveSceneLoader>();
         player = FindObjectOfType<HealthManager>();
+        cam = FindObjectOfType<CameraController>();
     }
 
     private void Update()
@@ -54,8 +57,13 @@ public class Manager : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            if(_level >= 2)
+            {
+                SceneManager.LoadScene("Victory");
+            }
             Debug.Log("nueva zona");
             GetComponent<BoxCollider>().enabled = false;
+            cam.minPos.z = 25f;
             currentEnemies = _enemysToKillInWave;
             _currentWave = 1;
         }
