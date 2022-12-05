@@ -134,7 +134,7 @@ ParticleSystem:
   m_GameObject: {fileID: 6679130321967843798}
   serializedVersion: 7
   lengthInSec: 5
-  simulationSpeed: 8.84
+  simulationSpeed: 6.04
   stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
@@ -208,7 +208,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.93
+      scalar: 1.6
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -261,7 +261,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.28
+      scalar: 0.11
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -693,7 +693,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 100
+    maxNumParticles: 46
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -752,7 +752,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 0
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -828,7 +828,7 @@ ParticleSystem:
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
-    m_Texture: {fileID: 0}
+    m_Texture: {fileID: 2800000, guid: 6b1156b73c2ce224ebc00127387d338d, type: 3}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
     m_TextureUVChannel: 0

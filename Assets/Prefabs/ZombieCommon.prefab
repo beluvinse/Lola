@@ -54,7 +54,7 @@ MonoBehaviour:
   blood: {fileID: 6614007289580347049, guid: b5cc315ff7bcdec4098ae081a489b9df, type: 3}
   player: {fileID: 0}
   _chaseRadius: 30
-  _attackRadius: 5
+  _attackRadius: 4
   _attackDelay: 2
   _isAttacking: 0
 --- !u!195 &5452547552819656227
@@ -71,7 +71,7 @@ NavMeshAgent:
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 4.8
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1

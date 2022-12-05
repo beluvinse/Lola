@@ -8,6 +8,9 @@ public class Manager : MonoBehaviour
     [SerializeField] private int _enemysToKillInWave;
     [SerializeField] private int _waves;
     [SerializeField] public int _level;
+    [SerializeField] AudioClip _doorSFX;
+
+    AudioSource _myAudioSource;
     AdditiveSceneLoader loader;
 
     public Transform door;
@@ -25,6 +28,7 @@ public class Manager : MonoBehaviour
         loader = FindObjectOfType<AdditiveSceneLoader>();
         player = FindObjectOfType<HealthManager>();
         cam = FindObjectOfType<CameraController>();
+        _myAudioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -87,8 +91,17 @@ public class Manager : MonoBehaviour
 
     public void OpenDoor()
     {
+        
         if (door.transform.position.x < 8f)
+        {
+            _myAudioSource.clip = _doorSFX;
+            if (!_myAudioSource.isPlaying)
+            {
+                _myAudioSource.Play();
+            }
             door.transform.position += Vector3.right * 5f * Time.deltaTime;
+        }
+            
     }
 
 }
