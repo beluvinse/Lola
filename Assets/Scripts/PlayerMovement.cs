@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
 
             transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+            Debug.DrawLine(this.transform.position, new Vector3(pointToLook.x, transform.position.y, pointToLook.z), Color.red);
         }
 
         _grounded = Physics.Raycast(transform.position, Vector3.down, _playerHeight * 0.5f + 0.2f, ground);
