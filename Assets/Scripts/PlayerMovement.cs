@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform orientation;
 
     private float _horizontalInput, _verticalInput;
-    private Vector3 moveDirection;
+    private Vector3 pointToLook, lookAt;
 
 
     Rigidbody myRb;
@@ -34,6 +34,12 @@ public class PlayerMovement : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private AudioClip _gunSFX;
     private AudioSource _myAudioSource;
+
+
+    public Vector3 getLookAt()
+    {
+        return lookAt;
+    }
 
     private void Start()
     {
@@ -53,11 +59,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (groundPlane.Raycast(cameraRay, out raylenght))
         {
-            Vector3 pointToLook = cameraRay.GetPoint(raylenght);
+            pointToLook = cameraRay.GetPoint(raylenght);
             Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
 
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
-            Debug.DrawLine(this.transform.position, new Vector3(pointToLook.x, transform.position.y, pointToLook.z), Color.red);
+            lookAt = new Vector3(pointToLook.x, transform.position.y, pointToLook.z);
+
+            transform.LookAt(lookAt);
+            //Debug.DrawLine(this.transform.position, lookAt, Color.red);
         }
 
         _grounded = Physics.Raycast(transform.position, Vector3.down, _playerHeight * 0.5f + 0.2f, ground);
