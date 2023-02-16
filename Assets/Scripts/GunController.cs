@@ -56,10 +56,9 @@ public class GunController : MonoBehaviour
         }
     }
 
-   
 
-   
 
+    /*
     void Update()
     {
         fireTimer += Time.deltaTime;
@@ -80,12 +79,13 @@ public class GunController : MonoBehaviour
             StartCoroutine(ShootLaser());
         }
     }
-
+    
     IEnumerator ShootLaser()
     {
         laserLine.enabled = true;
         yield return new WaitForSeconds(laserDuration);
         laserLine.enabled = false;
     }
+    */
 }
-}
+

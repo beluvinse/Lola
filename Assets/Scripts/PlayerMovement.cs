@@ -86,7 +86,11 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             gun.setIsFiring(false);
+        }
 
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(crOnRoll());
         }
     }
 
@@ -100,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
             _myAnim.SetFloat(_xAxisName, _horizontalInput);
             _myAnim.SetFloat(_zAxisName, _verticalInput);
         }
-        
+
     }
 
     private void MyInput()
@@ -151,6 +155,15 @@ public class PlayerMovement : MonoBehaviour
         _moveSpeed = startSpeed;
     }
 
+    private IEnumerator crOnRoll()
+    {
+        //_moveSpeed = 0;
+        _myAnim.SetTrigger("onRoll");
+        //OnShoot();
+        yield return new WaitForSeconds(0.25f);
+        _myAnim.SetTrigger("onEndRoll");
+        //_moveSpeed = startSpeed;
+    }
 }
 
 
