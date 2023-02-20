@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\GunController.cs" />
     <Compile Include="Assets\Scripts\BulletController.cs" />
+    <Compile Include="Assets\Scripts\VectorsExtension.cs" />
     <Compile Include="Assets\Scripts\MedKit.cs" />
     <Compile Include="Assets\Scripts\RangedZombie.cs" />
     <Compile Include="Assets\Scripts\AudioRequester.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Assets\Scripts\MenuManager.cs" />
     <Compile Include="Assets\Scripts\AdditiveSceneLoader.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\BulletTrail.cs" />
     <Compile Include="Assets\Scripts\WinLose.cs" />
     <Compile Include="Assets\Scripts\Spikes.cs" />
     <Compile Include="Assets\Scripts\CommonZombie.cs" />
@@ -75,8 +77,6 @@
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\SpikesTrigger.cs" />
     <Compile Include="Assets\Scripts\CursorController.cs" />
-    <Compile Include="Assets\Scripts\BulletTrail.cs" />
-    <Compile Include="Assets\Scripts\VectorsExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

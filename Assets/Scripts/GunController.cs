@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    [SerializeField] private Transform _pointToShoot;
     [SerializeField] private GameObject _bulletTrail;
     [SerializeField] private float _shotDelay;
     [SerializeField] private float _weaponRange = 25f;
     [SerializeField] private Animator _muzzleFlashAnim;
-
+    [SerializeField] private LayerMask _layerMask;
     
     [SerializeField] private Vector3 shootingRay;
 
@@ -43,37 +42,36 @@ public class GunController : MonoBehaviour
         if (isFiring)
         {
             shotCounter -= Time.deltaTime;
-            if(shotCounter <= 0)
+            if (shotCounter <= 0)
             {
                 shotCounter = _shotDelay;
                 RaycastHit hit;
-                if(Physics.Raycast(this.transform.position, transform.TransformDirection(Vector3.forward), out hit, _weaponRange))
-                {
-                    Debug.DrawRay(this.transform.position, transform.TransformDirection(Vector3.forward), Color.yellow, 5f);
-                    Debug.Log("s");
-                }
-                else
-                {
-                    Debug.DrawRay(this.transform.position, transform.TransformDirection(Vector3.forward), Color.blue, 3f);
-                    Debug.Log("a");
-                }
-
-                
-
                 var trail = Instantiate(
                     _bulletTrail,
                     this.transform.position,
                     this.transform.rotation
                     );
 
-                
-
                 var trailScript = trail.GetComponent<BulletTrail>();
 
-                
-                trailScript.SetTargetPosition(shootingRay);
-                Debug.Log(trailScript.GetTargetPosition());
+                trailScript.SetStartingPosition(this.transform.position);
 
+                if (Physics.Raycast(this.transform.position, transform.TransformDirection(Vector3.forward), out hit, _weaponRange, ~_layerMask))
+                {
+                    Debug.DrawRay(this.transform.position, transform.TransformDirection(Vector3.forward), Color.yellow, 5f);
+                    trailScript.SetTargetPosition(hit.transform.position);
+                    Debug.Log("hit");
+                }
+                else
+                {
+                    Debug.DrawRay(this.transform.position, transform.TransformDirection(Vector3.forward), Color.blue, 3f);
+                    Debug.Log("miss");
+                    trailScript.SetTargetPosition(shootingRay);
+                }
+
+
+
+                
                 //Physics.Raycast(this.transform.position, playerMov.getLookAt(), 25f);
                 //Instantiate(typeOfBullet, pointToShoot.position, pointToShoot.rotation);
             }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5968744638619473452}
   - component: {fileID: 5968744638619473453}
   - component: {fileID: 5968744638619473450}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BulletTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Time: 0.25
+  m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -82,7 +82,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.8142842
+        value: 0.0999974
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -90,8 +90,17 @@ TrailRenderer:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
+        time: 0.9608263
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.121126816
+        outWeight: 0.33333334
+      - serializedVersion: 3
         time: 1
-        value: 0.014287017
+        value: 0
         inSlope: 0.0734761
         outSlope: 0.0734761
         tangentMode: 0
@@ -151,4 +160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d8f83fb377f63b49badf48f37cbc1e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 40
+  _targetPosition: {x: 0, y: 0, z: 0}
+  _startingPosition: {x: 0, y: 0, z: 0}
+  _speed: 2000
