@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    [SerializeField] private GameObject typeOfBullet;
-    [SerializeField] public float shotDelay;
+    [SerializeField] private Transform _pointToShoot;
+    [SerializeField] private GameObject _bulletTrail;
+    [SerializeField] private float _shotDelay;
+    [SerializeField] private float _weaponRange = 25f;
+    [SerializeField] private Animator _muzzleFlashAnim;
+
     
-    private Vector3 shootingRay;
+    [SerializeField] private Vector3 shootingRay;
 
     public PlayerMovement playerMov;
 
     public float shotCounter;
 
-    public Transform pointToShoot;
+
     private bool isFiring;
 
-    LineRenderer laserLine;
 
     public bool getIsFiring()
     {
@@ -30,7 +33,6 @@ public class GunController : MonoBehaviour
 
     void Awake()
     {
-        laserLine = GetComponent<LineRenderer>();
     }
 
     private void Update()
@@ -43,8 +45,35 @@ public class GunController : MonoBehaviour
             shotCounter -= Time.deltaTime;
             if(shotCounter <= 0)
             {
-                laserLine.SetPosition(0, pointToShoot.position);
-                shotCounter = shotDelay;
+                shotCounter = _shotDelay;
+                RaycastHit hit;
+                if(Physics.Raycast(this.transform.position, transform.TransformDirection(Vector3.forward), out hit, _weaponRange))
+                {
+                    Debug.DrawRay(this.transform.position, transform.TransformDirection(Vector3.forward), Color.yellow, 5f);
+                    Debug.Log("s");
+                }
+                else
+                {
+                    Debug.DrawRay(this.transform.position, transform.TransformDirection(Vector3.forward), Color.blue, 3f);
+                    Debug.Log("a");
+                }
+
+                
+
+                var trail = Instantiate(
+                    _bulletTrail,
+                    this.transform.position,
+                    this.transform.rotation
+                    );
+
+                
+
+                var trailScript = trail.GetComponent<BulletTrail>();
+
+                
+                trailScript.SetTargetPosition(shootingRay);
+                Debug.Log(trailScript.GetTargetPosition());
+
                 //Physics.Raycast(this.transform.position, playerMov.getLookAt(), 25f);
                 //Instantiate(typeOfBullet, pointToShoot.position, pointToShoot.rotation);
             }
@@ -58,34 +87,6 @@ public class GunController : MonoBehaviour
 
 
 
-    /*
-    void Update()
-    {
-        fireTimer += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && fireTimer > fireRate)
-        {
-            fireTimer = 0;
-            
-            Vector3 rayOrigin = playerCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
-            RaycastHit hit;
-            if (Physics.Raycast(rayOrigin, playerCamera.transform.forward, out hit, gunRange))
-            {
-                laserLine.SetPosition(1, hit.point);
-            }
-            else
-            {
-                laserLine.SetPosition(1, rayOrigin + (playerCamera.transform.forward * gunRange));
-            }
-            StartCoroutine(ShootLaser());
-        }
-    }
     
-    IEnumerator ShootLaser()
-    {
-        laserLine.enabled = true;
-        yield return new WaitForSeconds(laserDuration);
-        laserLine.enabled = false;
-    }
-    */
 }
 

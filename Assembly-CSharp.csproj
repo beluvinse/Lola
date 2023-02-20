@@ -75,6 +75,8 @@
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\SpikesTrigger.cs" />
     <Compile Include="Assets\Scripts\CursorController.cs" />
+    <Compile Include="Assets\Scripts\BulletTrail.cs" />
+    <Compile Include="Assets\Scripts\VectorsExtension.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
