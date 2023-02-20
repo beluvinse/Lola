@@ -15,7 +15,7 @@ public class RangedZombie : Enemy
     [SerializeField] private float _attackDelay;
     [SerializeField] private bool _isAttacking;
 
-    public BulletController bullet;
+    public GameObject bullet;
     public Transform pointToShoot;
 
     private float attackCounter;
@@ -57,7 +57,8 @@ public class RangedZombie : Enemy
             if (attackCounter <= 0)
             {
                 attackCounter = _attackDelay;
-                Instantiate(bullet, pointToShoot.position, pointToShoot.rotation);
+                var bala = Instantiate(bullet, pointToShoot.position, pointToShoot.rotation);
+                bala.GetComponent<Rigidbody>().velocity = pointToShoot.forward * bala.GetComponent<AcidZombieBullet>().GetSpeed();
                 Debug.Log("te disparo");
             }
         }

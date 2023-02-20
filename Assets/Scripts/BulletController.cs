@@ -19,12 +19,7 @@ public class BulletController : MonoBehaviour
 
         if (other.gameObject.tag == hitTag)
         {
-            if (hitTag == "Enemy")
-            {
-                other.GetComponent<Enemy>().TakeDamage(_damage);
-                Debug.Log("mepegaste ");
-            }
-            else if (hitTag == "Player")
+            if (hitTag == "Player")
             {
                 other.GetComponent<HealthManager>().TakeDamage(_damage);
                 Debug.Log("mepegaste jugador ");

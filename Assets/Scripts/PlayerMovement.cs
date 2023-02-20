@@ -159,7 +159,8 @@ public class PlayerMovement : MonoBehaviour
     {
         //_moveSpeed = 0;
         _myAnim.SetTrigger("onRoll");
-        //OnShoot();
+        Vector3 mousePos = Input.mousePosition;
+        //ADDFORCE PARA MOVERLO HACIA ADELANTE??
         yield return new WaitForSeconds(0.25f);
         _myAnim.SetTrigger("onEndRoll");
         //_moveSpeed = startSpeed;

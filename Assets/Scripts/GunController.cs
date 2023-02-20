@@ -7,6 +7,7 @@ public class GunController : MonoBehaviour
     [SerializeField] private GameObject _bulletTrail;
     [SerializeField] private float _shotDelay;
     [SerializeField] private float _weaponRange = 25f;
+    [SerializeField] private float _weaponDmg = 25f;
     [SerializeField] private Animator _muzzleFlashAnim;
     [SerializeField] private LayerMask _layerMask;
     
@@ -61,6 +62,11 @@ public class GunController : MonoBehaviour
                     Debug.DrawRay(this.transform.position, transform.TransformDirection(Vector3.forward), Color.yellow, 5f);
                     trailScript.SetTargetPosition(hit.transform.position);
                     Debug.Log("hit");
+                    Debug.Log(hit.transform.name);
+                    if (hit.collider.CompareTag("Enemy"))
+                    {
+                        hit.collider.GetComponent<Enemy>().TakeDamage(_weaponDmg);
+                    }
                 }
                 else
                 {
