@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip _gunSFX;
     private AudioSource _myAudioSource;
 
+    public HealthManager pHM;
+    bool val = true;
 
     public Vector3 getLookAt()
     {
@@ -49,10 +51,13 @@ public class PlayerMovement : MonoBehaviour
         _myAnim = GetComponentInChildren<Animator>();
         startSpeed = _moveSpeed;
         _myAudioSource = GetComponent<AudioSource>();
+        pHM = GetComponent<HealthManager>();
     }
 
     private void Update()
     {
+        val = pHM.getDmg();
+
         Ray cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
         float raylenght;
@@ -88,13 +93,15 @@ public class PlayerMovement : MonoBehaviour
             gun.setIsFiring(false);
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
+            //ANADIR UN COOLDOWN PQ SINO SE ROMPE TODO    
             StartCoroutine(crOnRoll());
         }
     }
 
 
+    bool isRolling = false;
 
     private void FixedUpdate()
     {
@@ -104,6 +111,9 @@ public class PlayerMovement : MonoBehaviour
             _myAnim.SetFloat(_xAxisName, _horizontalInput);
             _myAnim.SetFloat(_zAxisName, _verticalInput);
         }
+
+        if(isRolling == true)
+            myRb.AddForce(transform.forward * 20, ForceMode.Impulse);
 
     }
 
@@ -157,13 +167,21 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator crOnRoll()
     {
-        //_moveSpeed = 0;
+        _moveSpeed = 0;
         _myAnim.SetTrigger("onRoll");
+        isRolling = true;
+        pHM.setDmg(val);
         Vector3 mousePos = Input.mousePosition;
+
         //ADDFORCE PARA MOVERLO HACIA ADELANTE??
-        yield return new WaitForSeconds(0.25f);
+        //myRb.AddRelativeForce(transform.forward * 10);
+        //myRb.AddForce(0, 0, 100, ForceMode.Impulse);
+
+        yield return new WaitForSeconds(.8f);
         _myAnim.SetTrigger("onEndRoll");
-        //_moveSpeed = startSpeed;
+        isRolling = false;
+        pHM.setDmg(val);
+        _moveSpeed = startSpeed;
     }
 }
 

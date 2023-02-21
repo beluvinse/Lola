@@ -19,6 +19,7 @@ public class RangedZombie : Enemy
     public Transform pointToShoot;
 
     private float attackCounter;
+    public AnimationClip attackAnim;
 
     private void Awake()
     {
@@ -42,15 +43,19 @@ public class RangedZombie : Enemy
         else if (distance <= _attackRadius)
         {
             _isAttacking = true;
+            _myAnim.SetBool("moving", false);
             transform.LookAt(player);
             Attack();
         }
         else
+        {
             _myAnim.SetBool("moving", false);
+        }
     }
 
     public override void Attack()
     {
+        //attackCounter = attackAnim(length);
         if (_isAttacking)
         {
             attackCounter -= Time.fixedDeltaTime;

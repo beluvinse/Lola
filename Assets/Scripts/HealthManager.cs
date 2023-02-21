@@ -14,10 +14,12 @@ public class HealthManager : MonoBehaviour
     private AudioSource _myAudioSource;
 
     public GameObject hurtParticle;
+    [SerializeField] private bool _canTakeDamage;
 
     private void Start()
     {
         _myAudioSource = GetComponent<AudioSource>();
+        _canTakeDamage = true;
     }
 
     public float getHealth()
@@ -28,6 +30,20 @@ public class HealthManager : MonoBehaviour
     public void setHealth(float health)
     {
         _health = health;
+    }
+    
+    public bool getDmg()
+    {
+        return _canTakeDamage;
+    }
+
+    public void setDmg(bool val)
+    {
+        if (val == true)
+            _canTakeDamage = false;
+        
+        if (val == false)
+            _canTakeDamage = true;
     }
 
     public float getMaxHealth()
@@ -42,13 +58,16 @@ public class HealthManager : MonoBehaviour
 
     public void TakeDamage(float val)
     {
-        _health -= val;
-        _myAudioSource.clip = _takeDamageSFX;
-        if (!_myAudioSource.isPlaying)
+        if (_canTakeDamage)
         {
-            _myAudioSource.Play();
+            _health -= val;
+            _myAudioSource.clip = _takeDamageSFX;
+            if (!_myAudioSource.isPlaying)
+            {
+                _myAudioSource.Play();
+            }
+            Instantiate(hurtParticle, this.gameObject.transform.position, this.gameObject.transform.rotation, this.transform);
         }
-        Instantiate(hurtParticle, this.gameObject.transform.position, this.gameObject.transform.rotation, this.transform);
     }
 }
 

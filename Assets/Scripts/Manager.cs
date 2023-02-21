@@ -13,7 +13,9 @@ public class Manager : MonoBehaviour
     AudioSource _myAudioSource;
     AdditiveSceneLoader loader;
 
-    public Transform door;
+    //public Transform door;
+    public Animation doorAnim;
+    bool doorIsOpen = false;
 
     private int _currentWave = 1;
     [SerializeField] private int currentEnemies;
@@ -38,6 +40,7 @@ public class Manager : MonoBehaviour
             if(_currentWave == _waves)
             {
                 OpenDoor();
+                doorIsOpen = true;
                 loader.AllEnemiesKilled();
             }
             else
@@ -91,17 +94,13 @@ public class Manager : MonoBehaviour
 
     public void OpenDoor()
     {
-        
-        if (door.transform.position.x < 8f)
+       
+        if (doorIsOpen == false)
         {
-            _myAudioSource.clip = _doorSFX;
-            if (!_myAudioSource.isPlaying)
-            {
-                _myAudioSource.Play();
-            }
-            door.transform.position += Vector3.right * 5f * Time.deltaTime;
+            doorAnim.Play();
+            _myAudioSource.Play();
         }
-            
+
     }
 
 }
