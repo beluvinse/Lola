@@ -38,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
     public HealthManager pHM;
     bool val = true;
 
+    public float rollCounter;
+    [SerializeField] private float _rollDelay;
+
     public Vector3 getLookAt()
     {
         return lookAt;
@@ -93,13 +96,20 @@ public class PlayerMovement : MonoBehaviour
             gun.setIsFiring(false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        rollCounter -= Time.deltaTime;
+        if (rollCounter <= 0 && Input.GetKeyDown(KeyCode.Space))
+
         {
-            //ANADIR UN COOLDOWN PQ SINO SE ROMPE TODO    
+            rollCounter = _rollDelay;
             StartCoroutine(crOnRoll());
         }
-    }
+        else
+        {
+            rollCounter -= Time.deltaTime;
+        }
 
+
+    }
 
     bool isRolling = false;
 
@@ -112,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
             _myAnim.SetFloat(_zAxisName, _verticalInput);
         }
 
-        if(isRolling == true)
+        if (isRolling == true)
             myRb.AddForce(transform.forward * 20, ForceMode.Impulse);
 
     }
