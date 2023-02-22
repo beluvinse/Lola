@@ -63,8 +63,8 @@ public class RangedZombie : Enemy
             {
                 attackCounter = _attackDelay;
                 var bala = Instantiate(bullet, pointToShoot.position, pointToShoot.rotation);
-                bala.GetComponent<Rigidbody>().velocity = pointToShoot.forward * bala.GetComponent<AcidZombieBullet>().GetSpeed();
-                Debug.Log("te disparo");
+                if(bala.GetComponent<AcidZombieBullet>())
+                    bala.GetComponent<Rigidbody>().velocity = pointToShoot.forward * bala.GetComponent<AcidZombieBullet>().GetSpeed();
             }
         }
         else

@@ -221,6 +221,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
+  _acidPuddle: {fileID: 6216885299843176003, guid: 20156e2fa2a62ba44be534b4b3a688c0, type: 3}
+  layer:
+    serializedVersion: 2
+    m_Bits: 72
 --- !u!1 &4450222934236696265
 GameObject:
   m_ObjectHideFlags: 0

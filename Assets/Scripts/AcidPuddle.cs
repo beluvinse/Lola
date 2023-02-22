@@ -4,35 +4,34 @@ using UnityEngine;
 
 public class AcidPuddle : MonoBehaviour
 {
-    [SerializeField] private float _damage = 0.05f;
+    [SerializeField] private float _damage = 10f;
     [SerializeField] private float _time = 10f;
 
     private float contador;
 
     private HealthManager _player;
     [SerializeField] private bool _isOnPuddle = false;
-    // Update is called once per frame
-    void Update()
+
+    void FixedUpdate()
     {
         contador += Time.deltaTime;
-        Acid();
-        if(contador >= _time)
+        if (contador >= _time)
         {
             _isOnPuddle = false;
             Destroy(this.gameObject);
         }
 
+        if (_isOnPuddle)
+        {
+            StartCoroutine(Acid());
+        }
+
     }
 
+   
+    
 
-
-    void Acid()
-    {
-        if(_isOnPuddle)
-            _player.TakeDamage(_damage);
-    }
-
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter (Collider other)
     {
         if (other.GetComponent<HealthManager>())
         {
@@ -50,5 +49,14 @@ public class AcidPuddle : MonoBehaviour
             _isOnPuddle = false;
         }
     }
+
+
+    IEnumerator Acid()
+    {
+        _player.TakeDamage(_damage);
+        yield return new WaitForSeconds(1);
+    }
+
+    
 
 }
