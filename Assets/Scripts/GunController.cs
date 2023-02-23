@@ -24,6 +24,12 @@ public class GunController : MonoBehaviour
     private bool isFiring;
 
 
+    public float GetShotDelay()
+    {
+        return _shotDelay;
+    }
+
+
     public bool getIsFiring()
     {
         return isFiring;

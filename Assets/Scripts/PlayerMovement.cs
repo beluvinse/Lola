@@ -49,6 +49,10 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private int _currentAmmo;
     [SerializeField] private int _maxAmmo;
+    private float _shotDelay;
+
+    public Pausa pause;
+    [SerializeField] private bool _gameIsPaused;
 
     public Vector3 getLookAt()
     {
@@ -74,8 +78,9 @@ public class PlayerMovement : MonoBehaviour
         startSpeed = _moveSpeed;
         _myAudioSource = GetComponent<AudioSource>();
         pHM = GetComponent<HealthManager>();
-        _maxAmmo = gun.GetComponent<GunController>().getMaxAmmo(); //NO SE POR QUE ME SALTA ERROR ACA NO TIENE SENTIDO 
+        _maxAmmo = gun.getMaxAmmo();
         _currentAmmo = _maxAmmo;
+        _shotDelay = gun.GetShotDelay();
     }
 
     private void Update()
@@ -102,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         SpeedControl();
 
-
+        _gameIsPaused = pause.getPausa();
         
 
 
@@ -116,13 +121,6 @@ public class PlayerMovement : MonoBehaviour
             ammoBox.ActiveUI();
 
             isReloading = true;
-            /*do
-            {
-                gun.GetComponent<GunController>().setAmmo(_maxAmmo);
-                OnReload();
-                 new WaitForSeconds(2);
-
-            } while (_currentAmmo < _maxAmmo - 1);*/
 
         }
     }
@@ -135,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
             var ammoBox = other.GetComponentInParent<Reload>();
             if (ammoBox.GetFill() >= 1)
             {
-                gun.GetComponent<GunController>().setAmmo(_maxAmmo);
+                gun.setAmmo(_maxAmmo);
                 OnReload();
                 isReloading = false;
                 ammoBox.DeactiveUI();
@@ -187,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
     private void LookAround()
     {
         Ray cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        Plane groundPlane = new Plane(Vector3.up, gun.transform.position);
         float raylenght;
 
         if (groundPlane.Raycast(cameraRay, out raylenght))
@@ -204,18 +202,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Shoot()
     {
-        if (Input.GetMouseButtonDown(0) && gun.GetComponent<GunController>().getAmmo() > 0 && !gun.getIsFiring())
+        if (Input.GetMouseButtonDown(0) && gun.getAmmo() > 0 && !gun.getIsFiring())
         {
             gun.setIsFiring(true);
             StartCoroutine(crOnShoot()); 
-            gun.GetComponent<GunController>().setAmmo(gun.GetComponent<GunController>().getAmmo() - 1);
+            gun.setAmmo(gun.getAmmo() - 1);
         }
-        else if (Input.GetMouseButtonDown(0) && gun.GetComponent<GunController>().getAmmo() <= 0)
+        else if (Input.GetMouseButtonDown(0) && gun.getAmmo() <= 0)
         {
             OnNoAmmo();
         }
 
-        if (Input.GetMouseButtonUp(0))
+       if (Input.GetMouseButtonUp(0))
         {
             gun.setIsFiring(false);
         }
@@ -253,7 +251,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnShoot()
     {
         _myAudioSource.clip = _gunSFX;
-        if (!_myAudioSource.isPlaying)
+        if (!_myAudioSource.isPlaying && _gameIsPaused == false) //y si el juego no esta en pausa
         {
             _myAudioSource.Play();
         }

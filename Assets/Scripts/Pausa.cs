@@ -13,7 +13,10 @@ public class Pausa : MonoBehaviour
     public GameObject ajustesUI;
     public GameObject flechita;
 
-
+    public bool getPausa()
+    {
+        return GameIsPaused;
+    }
 
 
     private void Update()
