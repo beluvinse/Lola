@@ -58,6 +58,7 @@
     <Compile Include="Assets\Scripts\VectorsExtension.cs" />
     <Compile Include="Assets\Scripts\MedKit.cs" />
     <Compile Include="Assets\Scripts\RangedZombie.cs" />
+    <Compile Include="Assets\Scripts\Reload.cs" />
     <Compile Include="Assets\Scripts\AcidZombieBullet.cs" />
     <Compile Include="Assets\Scripts\AudioRequester.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
@@ -80,7 +81,7 @@
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\SpikesTrigger.cs" />
     <Compile Include="Assets\Scripts\CursorController.cs" />
-    <Compile Include="Assets\Reload.cs" />
+    <Compile Include="Assets\Scripts\DamageBuff.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

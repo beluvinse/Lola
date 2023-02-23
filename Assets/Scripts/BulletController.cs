@@ -24,7 +24,9 @@ public class BulletController : MonoBehaviour
                 other.GetComponent<HealthManager>().TakeDamage(_damage);
                 Debug.Log("mepegaste jugador ");
             }
-            Destroy(this.gameObject);
+
+            if (other.GetComponent<HealthManager>().getDmg())
+                Destroy(this.gameObject);
 
         }
         if (other.gameObject.tag == "Wall")

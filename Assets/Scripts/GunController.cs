@@ -92,7 +92,7 @@ public class GunController : MonoBehaviour
                 {
                     Debug.DrawRay(this.transform.position, transform.TransformDirection(Vector3.forward), Color.blue, 3f);
                     Debug.Log("miss");
-                    trailScript.SetTargetPosition(shootingRay);
+                    trailScript.SetTargetPosition(this.transform.position + transform.TransformDirection(Vector3.forward) * _weaponRange);
                 }
 
 

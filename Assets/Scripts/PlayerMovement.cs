@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     public HealthManager pHM;
     bool val = true;
     bool isRolling = false;
+    bool isReloading = false;
 
     public float rollCounter;
     [SerializeField] private float _rollDelay;
@@ -83,48 +84,26 @@ public class PlayerMovement : MonoBehaviour
 
 
         _grounded = Physics.Raycast(transform.position, Vector3.down, _playerHeight * 0.5f + 0.2f, ground);
-
-
-        if (!isRolling)
-        {
-            LookAround();
-        }
-
-        MyInput();
-        SpeedControl();
-
         if (_grounded)
             myRb.drag = groundDrag;
         else
             myRb.drag = 0;
 
-        if (Input.GetMouseButtonDown(0) && gun.GetComponent<GunController>().getAmmo() > 0)
-        {
-            gun.setIsFiring(true);
-            StartCoroutine(crOnShoot());
-            gun.GetComponent<GunController>().setAmmo(gun.GetComponent<GunController>().getAmmo() - 1);
-        }
-        else if(Input.GetMouseButtonDown(0) && gun.GetComponent<GunController>().getAmmo() <= 0)
-        {
-            OnNoAmmo(); 
-        }
 
-        if (Input.GetMouseButtonUp(0))
-        {
-            gun.setIsFiring(false);
-        }
+        if (!isRolling)
+            LookAround();
 
-        rollCounter -= Time.deltaTime;
-        if (rollCounter <= 0 && Input.GetMouseButtonDown(1))
+        if(!isReloading)
+            Shoot();
 
-        {
-            rollCounter = _rollDelay;
-            StartCoroutine(crOnRoll());
-        }
-        else
-        {
-            rollCounter -= Time.deltaTime;
-        }
+        if (!gun.getIsFiring())
+            Roll();
+
+        MyInput();
+        SpeedControl();
+
+
+        
 
 
     }
@@ -136,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
             var ammoBox = other.GetComponentInParent<Reload>();
             ammoBox.ActiveUI();
 
-
+            isReloading = true;
             /*do
             {
                 gun.GetComponent<GunController>().setAmmo(_maxAmmo);
@@ -152,11 +131,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if(other.tag == "Ammo")
         {
+
             var ammoBox = other.GetComponentInParent<Reload>();
             if (ammoBox.GetFill() >= 1)
             {
                 gun.GetComponent<GunController>().setAmmo(_maxAmmo);
                 OnReload();
+                isReloading = false;
                 ammoBox.DeactiveUI();
             }
         }
@@ -167,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.tag == "Ammo")
         {
             other.GetComponentInParent<Reload>().DeactiveUI();
+            isReloading = false;
         }
 
     }
@@ -217,6 +199,40 @@ public class PlayerMovement : MonoBehaviour
 
             transform.LookAt(lookAt);
             //Debug.DrawLine(this.transform.position, lookAt, Color.red);
+        }
+    }
+
+    private void Shoot()
+    {
+        if (Input.GetMouseButtonDown(0) && gun.GetComponent<GunController>().getAmmo() > 0 && !gun.getIsFiring())
+        {
+            gun.setIsFiring(true);
+            StartCoroutine(crOnShoot()); 
+            gun.GetComponent<GunController>().setAmmo(gun.GetComponent<GunController>().getAmmo() - 1);
+        }
+        else if (Input.GetMouseButtonDown(0) && gun.GetComponent<GunController>().getAmmo() <= 0)
+        {
+            OnNoAmmo();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            gun.setIsFiring(false);
+        }
+    }
+
+    private void Roll()
+    {
+        rollCounter -= Time.deltaTime;
+        if (rollCounter <= 0 && Input.GetMouseButtonDown(1))
+
+        {
+            rollCounter = _rollDelay;
+            StartCoroutine(crOnRoll());
+        }
+        else
+        {
+            rollCounter -= Time.deltaTime;
         }
     }
 

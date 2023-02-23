@@ -12,8 +12,4 @@ public class CursorController : MonoBehaviour
         Cursor.SetCursor(cursorAim, Vector3.zero, CursorMode.ForceSoftware);
     }
 
-    private void Update()
-    {
-        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    }
 }

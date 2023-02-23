@@ -35,7 +35,7 @@ public class Reload : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && _slider.IsActive())
         {
             _slider.value += speed * Time.deltaTime;
         }

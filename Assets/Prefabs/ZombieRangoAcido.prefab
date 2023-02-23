@@ -2203,7 +2203,7 @@ MonoBehaviour:
   blood: {fileID: 6614007289580347049, guid: b5cc315ff7bcdec4098ae081a489b9df, type: 3}
   player: {fileID: 0}
   _chaseRadius: 25
-  _attackRadius: 15
+  _attackRadius: 20
   _attackDelay: 1.5
   _isAttacking: 0
   bullet: {fileID: 4338005334111246618, guid: 604b6764991bbc04baa296706bb249db, type: 3}
