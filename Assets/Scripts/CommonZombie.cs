@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class CommonZombie : Enemy
 {
-    public Transform player;
+    private Transform player;
     private Animator _myAnim;
 
     [Header("Values")]
@@ -22,6 +22,7 @@ public class CommonZombie : Enemy
         _myAnim = GetComponentInChildren<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _myAnim.SetBool("moving", false);
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void FixedUpdate()

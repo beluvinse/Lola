@@ -7,7 +7,7 @@ public class Manager : MonoBehaviour
 {
     [SerializeField] private int _enemysToKillInWave;
     [SerializeField] private int _waves;
-    [SerializeField] public int _level;
+    [SerializeField] private int _level;
     [SerializeField] AudioClip _doorSFX;
 
     AudioSource _myAudioSource;
@@ -90,6 +90,11 @@ public class Manager : MonoBehaviour
     public int getWaves()
     {
         return _waves;
+    }
+
+    public int GetLevel()
+    {
+        return _level;
     }
 
     public void OpenDoor()
