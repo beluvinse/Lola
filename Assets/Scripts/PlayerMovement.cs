@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private float _rollSpeed;
     float startSpeed;
     public float groundDrag;
 
@@ -114,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rollCounter -= Time.deltaTime;
-        if (rollCounter <= 0 && Input.GetKeyDown(KeyCode.Space))
+        if (rollCounter <= 0 && Input.GetMouseButtonDown(1))
 
         {
             rollCounter = _rollDelay;
@@ -128,22 +129,47 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Ammo")
         {
-            do
+            var ammoBox = other.GetComponentInParent<Reload>();
+            ammoBox.ActiveUI();
+
+
+            /*do
             {
                 gun.GetComponent<GunController>().setAmmo(_maxAmmo);
                 OnReload();
                  new WaitForSeconds(2);
 
-            } while (_currentAmmo < _maxAmmo - 1);
+            } while (_currentAmmo < _maxAmmo - 1);*/
 
         }
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.tag == "Ammo")
+        {
+            var ammoBox = other.GetComponentInParent<Reload>();
+            if (ammoBox.GetFill() >= 1)
+            {
+                gun.GetComponent<GunController>().setAmmo(_maxAmmo);
+                OnReload();
+                ammoBox.DeactiveUI();
+            }
+        }
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Ammo")
+        {
+            other.GetComponentInParent<Reload>().DeactiveUI();
+        }
+
+    }
 
 
 
@@ -157,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (isRolling == true)
-            myRb.AddForce(transform.forward * 15, ForceMode.Impulse);
+            myRb.AddForce(transform.forward * _rollSpeed, ForceMode.Impulse);
 
     }
 

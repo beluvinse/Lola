@@ -88,7 +88,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.5905e-41, y: 0, z: 0, w: 1}
+  m_BoundingSphereOverride: {x: 7.71e-43, y: -115.266174, z: 7.71e-43, w: NaN}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -4995,8 +4995,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24fc5bf472958184fba574bb6559b6ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 15
-  _damage: 10
+  _speed: 20
+  _damage: 20
   hitTag: Player
 --- !u!54 &8586080318648298014
 Rigidbody:
@@ -5025,5 +5025,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 1}
+  m_Size: {x: 3, y: 3, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
