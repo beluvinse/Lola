@@ -61,6 +61,7 @@
     <Compile Include="Assets\Scripts\AcidZombieBullet.cs" />
     <Compile Include="Assets\Scripts\AudioRequester.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Ammo.cs" />
     <Compile Include="Assets\Scripts\UIManager.cs" />
     <Compile Include="Assets\Scripts\AcidPuddle.cs" />
     <Compile Include="Assets\Scripts\TestMovement.cs" />
@@ -79,7 +80,6 @@
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\SpikesTrigger.cs" />
     <Compile Include="Assets\Scripts\CursorController.cs" />
-    <Compile Include="Assets\Scripts\Ammo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

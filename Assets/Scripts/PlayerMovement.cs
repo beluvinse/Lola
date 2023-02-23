@@ -33,10 +33,13 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Audio")]
     [SerializeField] private AudioClip _gunSFX;
+    [SerializeField] private AudioClip _reloadSFX;
+    [SerializeField] private AudioClip _noAmmoSFX;
     private AudioSource _myAudioSource;
 
     public HealthManager pHM;
     bool val = true;
+    bool isRolling = false;
 
     public float rollCounter;
     [SerializeField] private float _rollDelay;
@@ -77,22 +80,14 @@ public class PlayerMovement : MonoBehaviour
     {
         val = pHM.getDmg();
 
-        Ray cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        float raylenght;
-
-        if (groundPlane.Raycast(cameraRay, out raylenght))
-        {
-            pointToLook = cameraRay.GetPoint(raylenght);
-            Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
-
-            lookAt = new Vector3(pointToLook.x, transform.position.y, pointToLook.z);
-
-            transform.LookAt(lookAt);
-            //Debug.DrawLine(this.transform.position, lookAt, Color.red);
-        }
 
         _grounded = Physics.Raycast(transform.position, Vector3.down, _playerHeight * 0.5f + 0.2f, ground);
+
+
+        if (!isRolling)
+        {
+            LookAround();
+        }
 
         MyInput();
         SpeedControl();
@@ -108,6 +103,11 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(crOnShoot());
             gun.GetComponent<GunController>().setAmmo(gun.GetComponent<GunController>().getAmmo() - 1);
         }
+        else if(Input.GetMouseButtonDown(0) && gun.GetComponent<GunController>().getAmmo() <= 0)
+        {
+            OnNoAmmo(); 
+        }
+
         if (Input.GetMouseButtonUp(0))
         {
             gun.setIsFiring(false);
@@ -134,19 +134,18 @@ public class PlayerMovement : MonoBehaviour
         {
             do
             {
-                gun.GetComponent<GunController>().setAmmo(_currentAmmo + 1);
+                gun.GetComponent<GunController>().setAmmo(_maxAmmo);
+                OnReload();
                  new WaitForSeconds(2);
 
             } while (_currentAmmo < _maxAmmo - 1);
-
-
 
         }
     }
 
 
 
-    bool isRolling = false;
+
 
     private void FixedUpdate()
     {
@@ -177,6 +176,24 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void LookAround()
+    {
+        Ray cameraRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float raylenght;
+
+        if (groundPlane.Raycast(cameraRay, out raylenght))
+        {
+            pointToLook = cameraRay.GetPoint(raylenght);
+            Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
+
+            lookAt = new Vector3(pointToLook.x, transform.position.y, pointToLook.z);
+
+            transform.LookAt(lookAt);
+            //Debug.DrawLine(this.transform.position, lookAt, Color.red);
+        }
+    }
+
 
     private void SpeedControl()
     {
@@ -194,6 +211,25 @@ public class PlayerMovement : MonoBehaviour
     public void OnShoot()
     {
         _myAudioSource.clip = _gunSFX;
+        if (!_myAudioSource.isPlaying)
+        {
+            _myAudioSource.Play();
+        }
+
+    }
+
+    public void OnNoAmmo()
+    {
+        _myAudioSource.clip = _noAmmoSFX;
+        if (!_myAudioSource.isPlaying)
+        {
+            _myAudioSource.Play();
+        }
+
+    }
+    public void OnReload()
+    {
+        _myAudioSource.clip = _reloadSFX;
         if (!_myAudioSource.isPlaying)
         {
             _myAudioSource.Play();

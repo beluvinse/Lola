@@ -8464,6 +8464,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZombieRango
       objectReference: {fileID: 0}
+    - target: {fileID: 6097635336344085766, guid: 8ab95f1a2ff3f5d4c82a60dd97ce44b9, type: 3}
+      propertyPath: _attackDelay
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6097635336344085767, guid: 8ab95f1a2ff3f5d4c82a60dd97ce44b9, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -10519,7 +10523,7 @@ MonoBehaviour:
   playerMov: {fileID: 1891459615}
   shotCounter: 0
   _currentAmmo: 0
-  maxAmmo: 5
+  maxAmmo: 24
 --- !u!4 &1127641299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6097635336344085767, guid: 8ab95f1a2ff3f5d4c82a60dd97ce44b9, type: 3}
@@ -18323,7 +18327,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh193452
+  m_Name: pb_Mesh27324
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20260,6 +20264,8 @@ MonoBehaviour:
   _shootAnimation: {fileID: 7400000, guid: f3002af37933db44dac32719f847cffc, type: 2}
   gun: {fileID: 1110705143}
   _gunSFX: {fileID: 8300000, guid: e0e02ac3737006e46ae00cee0f640587, type: 3}
+  _reloadSFX: {fileID: 8300000, guid: 66f7cea8a805ba341ab3c314abccef33, type: 3}
+  _noAmmoSFX: {fileID: 8300000, guid: ebe8bb5c12a88b74facda84ebb7c49a9, type: 3}
   pHM: {fileID: 0}
   rollCounter: 0
   _rollDelay: 3
