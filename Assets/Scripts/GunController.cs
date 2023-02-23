@@ -17,6 +17,9 @@ public class GunController : MonoBehaviour
 
     public float shotCounter;
 
+    [SerializeField] private int _currentAmmo;
+    public int maxAmmo;
+
 
     private bool isFiring;
 
@@ -30,9 +33,26 @@ public class GunController : MonoBehaviour
     {
         isFiring = val;
     }
-
-    void Awake()
+    
+    
+    public int getAmmo()
     {
+        return _currentAmmo;
+    }
+    
+    public int getMaxAmmo()
+    {
+        return maxAmmo;
+    }
+
+    public void setAmmo(int val)
+    {
+        _currentAmmo = val;
+    }
+
+    void Start()
+    {
+        _currentAmmo = maxAmmo;
     }
 
     private void Update()

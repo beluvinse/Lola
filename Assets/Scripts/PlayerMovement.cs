@@ -41,9 +41,23 @@ public class PlayerMovement : MonoBehaviour
     public float rollCounter;
     [SerializeField] private float _rollDelay;
 
+
+    [SerializeField] private int _currentAmmo;
+    [SerializeField] private int _maxAmmo;
+
     public Vector3 getLookAt()
     {
         return lookAt;
+    }
+
+    public float getRollDelay()
+    {
+        return _rollDelay;
+    }
+    
+    public float getRollCounter()
+    {
+        return rollCounter;
     }
 
     private void Start()
@@ -55,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
         startSpeed = _moveSpeed;
         _myAudioSource = GetComponent<AudioSource>();
         pHM = GetComponent<HealthManager>();
+        _maxAmmo = gun.GetComponent<GunController>().getMaxAmmo(); //NO SE POR QUE ME SALTA ERROR ACA NO TIENE SENTIDO 
+        _currentAmmo = _maxAmmo;
     }
 
     private void Update()
@@ -86,10 +102,11 @@ public class PlayerMovement : MonoBehaviour
         else
             myRb.drag = 0;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && gun.GetComponent<GunController>().getAmmo() > 0)
         {
             gun.setIsFiring(true);
             StartCoroutine(crOnShoot());
+            gun.GetComponent<GunController>().setAmmo(gun.GetComponent<GunController>().getAmmo() - 1);
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -111,6 +128,24 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.tag == "Ammo")
+        {
+            do
+            {
+                gun.GetComponent<GunController>().setAmmo(_currentAmmo + 1);
+                 new WaitForSeconds(2);
+
+            } while (_currentAmmo < _maxAmmo - 1);
+
+
+
+        }
+    }
+
+
+
     bool isRolling = false;
 
     private void FixedUpdate()
@@ -123,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (isRolling == true)
-            myRb.AddForce(transform.forward * 20, ForceMode.Impulse);
+            myRb.AddForce(transform.forward * 15, ForceMode.Impulse);
 
     }
 
@@ -163,6 +198,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _myAudioSource.Play();
         }
+
     }
 
     private IEnumerator crOnShoot()
@@ -181,12 +217,6 @@ public class PlayerMovement : MonoBehaviour
         _myAnim.SetTrigger("onRoll");
         isRolling = true;
         pHM.setDmg(val);
-        Vector3 mousePos = Input.mousePosition;
-
-        //ADDFORCE PARA MOVERLO HACIA ADELANTE??
-        //myRb.AddRelativeForce(transform.forward * 10);
-        //myRb.AddForce(0, 0, 100, ForceMode.Impulse);
-
         yield return new WaitForSeconds(.8f);
         _myAnim.SetTrigger("onEndRoll");
         isRolling = false;
