@@ -13,7 +13,7 @@ public class Ajustes : MonoBehaviour
 
     public void Start()
     {
-        volume.value = PlayerPrefs.GetFloat("volumeAudio", 0.5f);
+        volume.value = PlayerPrefs.GetFloat("volumeAudio", 1f);
         AudioListener.volume = volume.value;
     }
 
