@@ -10,7 +10,8 @@ public class GunController : MonoBehaviour
     [SerializeField] private float _weaponDmg = 25f;
     [SerializeField] private Animator _muzzleFlashAnim;
     [SerializeField] private LayerMask _layerMask;
-    
+    public GameObject player;
+
     [SerializeField] private Vector3 shootingRay;
 
     public PlayerMovement playerMov;
@@ -22,6 +23,8 @@ public class GunController : MonoBehaviour
 
 
     private bool isFiring;
+
+    public GameObject buffParticles;
 
 
     public float GetShotDelay()
@@ -59,6 +62,8 @@ public class GunController : MonoBehaviour
     void Start()
     {
         _currentAmmo = maxAmmo;
+        player = GameObject.FindGameObjectWithTag("Player");
+
     }
 
     private void Update()
@@ -126,8 +131,10 @@ public class GunController : MonoBehaviour
     private IEnumerator BuffWeaponCouroutine(float val, float timer)
     {
         var aux = _weaponDmg;
+        var particles = Instantiate(buffParticles, player.gameObject.transform.position, player.gameObject.transform.rotation, player.transform);
         _weaponDmg = val;
         yield return new WaitForSeconds(timer);
+        Destroy(particles);
         _weaponDmg = aux;
     }
 }

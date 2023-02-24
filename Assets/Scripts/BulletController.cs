@@ -35,26 +35,4 @@ public class BulletController : MonoBehaviour
 
         }
     }
-
-    /*private void OnTriggerStay(Collider other)
-    {
-
-        if (other.gameObject.tag == hitTag)
-        {
-            if (hitTag == "Enemy")
-            {
-                other.GetComponent<Enemy>().TakeDamage(_damage);
-                Debug.Log("mepegaste ");
-            }
-            else if (hitTag == "Player")
-            {
-                other.GetComponent<HealthManager>().TakeDamage(_damage);
-                Debug.Log("mepegaste jugador ");
-            }
-            Destroy(this.gameObject);
-        }
-
-       
-
-    }*/
 }
