@@ -94,18 +94,21 @@ public class PlayerMovement : MonoBehaviour
         else
             myRb.drag = 0;
 
+        if (!_gameIsPaused) 
+        { 
 
-        if (!isRolling)
-            LookAround();
+            if (!isRolling)
+                LookAround();
 
-        if(!isReloading)
-            Shoot();
+            if (!isReloading)
+                Shoot();
 
-        if (!gun.getIsFiring())
-            Roll();
+            if (!gun.getIsFiring())
+                Roll();
 
-        MyInput();
-        SpeedControl();
+            MyInput();
+            SpeedControl();
+        }
 
         _gameIsPaused = pause.getPausa();
         

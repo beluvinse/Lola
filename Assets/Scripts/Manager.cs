@@ -12,6 +12,7 @@ public class Manager : MonoBehaviour
 
     AudioSource _myAudioSource;
     AdditiveSceneLoader loader;
+    SpawnEnemies spawner;
 
     //public Transform door;
     public Animation doorAnim;
@@ -24,14 +25,24 @@ public class Manager : MonoBehaviour
     CameraController cam;
     private float _health;
 
+    private void Awake()
+    {
+        spawner = GetComponent<SpawnEnemies>();
+
+    }
+
     private void Start()
     {
-        currentEnemies = _enemysToKillInWave;
         loader = FindObjectOfType<AdditiveSceneLoader>();
         player = FindObjectOfType<HealthManager>();
         cam = FindObjectOfType<CameraController>();
         _myAudioSource = GetComponent<AudioSource>();
+        spawner.Spawn(_enemysToKillInWave);
+        currentEnemies = _enemysToKillInWave;
+
     }
+
+
 
     private void Update()
     {
@@ -47,6 +58,8 @@ public class Manager : MonoBehaviour
             {
                 _currentWave++;
                 currentEnemies = _enemysToKillInWave;
+                new WaitForSeconds(100f);
+                spawner.Spawn(_enemysToKillInWave);
             }
             
         }

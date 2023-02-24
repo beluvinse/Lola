@@ -4995,7 +4995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24fc5bf472958184fba574bb6559b6ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 20
+  _speed: 15
   _damage: 20
   hitTag: Player
 --- !u!54 &8586080318648298014
