@@ -69,6 +69,11 @@ public class PlayerMovement : MonoBehaviour
         return rollCounter;
     }
 
+    public void BuffGun(float val, float timer)
+    {
+        gun.BuffWeapon(val, timer);
+    }
+
     private void Start()
     {
         myRb = GetComponent<Rigidbody>();

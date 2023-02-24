@@ -113,10 +113,22 @@ public class GunController : MonoBehaviour
             shotCounter -= Time.deltaTime;
 
         }
+        
+
+    }
+
+    public void BuffWeapon(float val, float timer)
+    {
+        StartCoroutine(BuffWeaponCouroutine(val, timer));
     }
 
 
-
-    
+    private IEnumerator BuffWeaponCouroutine(float val, float timer)
+    {
+        var aux = _weaponDmg;
+        _weaponDmg = val;
+        yield return new WaitForSeconds(timer);
+        _weaponDmg = aux;
+    }
 }
 

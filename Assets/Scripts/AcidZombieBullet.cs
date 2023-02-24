@@ -11,10 +11,12 @@ public class AcidZombieBullet : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(this.transform.position, Vector3.down, out hit, 0.1f, layer))
+        Debug.Log("a");
+        if (Physics.Raycast(this.transform.position, Vector3.down, out hit, 0.5f, layer))
         {
+            Debug.Log("aaa");
             var puddle = Instantiate(_acidPuddle, hit.point, Quaternion.identity);
-            puddle.transform.position.WithAxis(Axis.Y, -0.95f);
+            puddle.transform.position.WithAxis(Axis.Y, -0.25f);
             Destroy(this.gameObject);
         }
     }

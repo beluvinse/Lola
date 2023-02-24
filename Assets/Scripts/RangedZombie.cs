@@ -25,7 +25,7 @@ public class RangedZombie : Enemy
     {
         _myAnim = GetComponentInChildren<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
-        player = Transform.FindObjectOfType<PlayerMovement>().transform;
+        player = FindObjectOfType<PlayerMovement>().transform;
         _myAnim.SetBool("moving", false);
     }
 
