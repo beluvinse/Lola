@@ -664,6 +664,7 @@ GameObject:
   - component: {fileID: 6229278006829480440}
   - component: {fileID: 4734201257786998205}
   - component: {fileID: 5580570338570721324}
+  - component: {fileID: 1089889225373893832}
   m_Layer: 0
   m_Name: MilitaryBox
   m_TagString: Ammo
@@ -764,3 +765,19 @@ MonoBehaviour:
   _reload: {fileID: 4734201257923818734}
   _slider: {fileID: 4734201258012495999}
   speed: 1
+--- !u!208 &1089889225373893832
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5580570338570721325}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.0630001, y: 0.74500006, z: 2.154}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.017, y: 0.74500006, z: 0}
+  m_TimeToStationary: 0.5

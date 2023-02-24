@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311926, g: 0.38073996, b: 0.35872698, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3935,11 +3935,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d92c509812915446afb7969323bc3d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemysToKillInWave: 8
+  _enemysToKillInWave: 5
   _waves: 2
   _level: 2
   _doorSFX: {fileID: 8300000, guid: 0089d1c6de463de4a93ffa62196bb0c0, type: 3}
   doorAnim: {fileID: 80585647}
+  _currentWave: 0
   currentEnemies: 0
 --- !u!4 &531234830
 Transform:
@@ -4839,7 +4840,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-72528
+  m_Name: pb_Mesh57930
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7099,7 +7100,7 @@ GameObject:
   - component: {fileID: 1069878331}
   m_Layer: 2
   m_Name: room 1
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -8426,7 +8427,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-72526
+  m_Name: pb_Mesh58026
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10090,8 +10091,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1549400025}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.77214, y: 0, z: -62.165}
-  m_LocalScale: {x: 0.5712308, y: 1.07, z: 1.07}
+  m_LocalPosition: {x: -0.7096, y: -0, z: -60.0591}
+  m_LocalScale: {x: 0.5703729, y: 1.07, z: 1.0342786}
   m_Children: []
   m_Father: {fileID: 1069878330}
   m_RootOrder: 0

@@ -40,14 +40,13 @@ public class UIManager : MonoBehaviour
         myBar.fillAmount = _health / _maxHealth;
         
         _roll = player.GetComponent<PlayerMovement>().getRollCounter();
-        //myBar2.fillAmount = _maxRoll - ( _maxRoll +_roll );
         myBar2.fillAmount = _roll / _maxRoll;
 
-        _currentWave = manager.GetComponent<Manager>().getCurrentWave();
-        _waves = manager.GetComponent<Manager>().getWaves();
+        _currentWave = manager.getCurrentWave();
+        _waves = manager.getWaves();
         wavesInfo.text = "Ola: " + _currentWave + "/" + _waves;
 
-        _currentBullets = gun.GetComponent<GunController>().getAmmo();
+        _currentBullets = gun.getAmmo();
         bullets.text = "Balas: " + _currentBullets + "/" + _maxBullets;
     }
 }

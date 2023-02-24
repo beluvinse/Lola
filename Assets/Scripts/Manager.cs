@@ -18,7 +18,7 @@ public class Manager : MonoBehaviour
     public Animation doorAnim;
     bool doorIsOpen = false;
 
-    private int _currentWave = 1;
+    [SerializeField] private int _currentWave = 1;
     [SerializeField] private int currentEnemies;
 
     HealthManager player;
@@ -39,6 +39,7 @@ public class Manager : MonoBehaviour
         _myAudioSource = GetComponent<AudioSource>();
         spawner.Spawn(_enemysToKillInWave);
         currentEnemies = _enemysToKillInWave;
+        _currentWave = 1;
 
     }
 
@@ -52,7 +53,7 @@ public class Manager : MonoBehaviour
             {
                 OpenDoor();
                 doorIsOpen = true;
-                loader.AllEnemiesKilled();
+                //loader.AllEnemiesKilled();
             }
             else
             {
@@ -75,17 +76,20 @@ public class Manager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if(other.gameObject.tag == "Player")
         {
             if(_level >= 2)
             {
                 SceneManager.LoadScene("Victory");
             }
+            loader.AllEnemiesKilled();
             Debug.Log("nueva zona");
             GetComponent<BoxCollider>().enabled = false;
             cam.minPos.z = 25f;
             currentEnemies = _enemysToKillInWave;
             _currentWave = 1;
+            Destroy(this.gameObject);
         }
     }
 
